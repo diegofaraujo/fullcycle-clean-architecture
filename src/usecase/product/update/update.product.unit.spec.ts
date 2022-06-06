@@ -1,17 +1,17 @@
 import ProductFactory from "../../../domain/product/factory/product.factory";
 import UpdateProductUseCase from "./update.product.usecase";
 
-const produt = ProductFactory.create("a", "Product", 10);
+const mockProdut = ProductFactory.create("a", "Product", 10);
 
 const input = {
-  id: produt.id,
-  name: produt.name,
-  price: produt.price,
+  id: mockProdut.id,
+  name: "Product ABC Updated",
+  price: 12.5,
 };
 
 const MockRepository = () => {
   return {
-    find: jest.fn().mockResolvedValue(produt),
+    find: jest.fn().mockResolvedValue(mockProdut),
     findAll: jest.fn(),
     update: jest.fn(),
     create: jest.fn(),
@@ -33,7 +33,7 @@ describe("Test update product use case", () => {
     const productUpdateUseCase = new UpdateProductUseCase(productRepository);
 
     const input = {
-      id: "123",
+      id: mockProdut.id,
       name: "",
       price: 10,
     };
@@ -48,7 +48,7 @@ describe("Test update product use case", () => {
     const productUpdateUseCase = new UpdateProductUseCase(productRepository);
 
     const input = {
-      id: "123",
+      id: mockProdut.id,
       name: "Product",
       price: -1,
     };
